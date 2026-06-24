@@ -18,6 +18,16 @@ if (apikeyPropertiesFile.exists()) {
     android.defaultConfig.buildConfigField("String", "GOOGLE_API_KEY", "\"\"")
 }
 
+def apikeyPropertiesFile = rootProject.file("apikey.properties")
+def keyvalue = "\"\""
+
+if (apikeyPropertiesFile.exists()) {
+    def apikeyProperties = new Properties()
+    apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
+    if (apikeyProperties['GOOGLE_API_KEY'] != null) {
+        keyvalue = "\"${apikeyProperties['GOOGLE_API_KEY']}\""
+    }
+}
 android {
 
     compileSdkVersion 30
