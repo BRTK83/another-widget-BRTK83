@@ -37,7 +37,7 @@ class NotificationListener : NotificationListenerService() {
 
                 if (bundle.containsKey(Notification.EXTRA_TITLE) && !isGroupHeader && !isOngoing && ActiveNotificationsHelper.isAppAccepted(sbn.packageName) && !sbn.packageName.contains("com.android.systemui")) {
                     Preferences.lastNotificationId = sbn.id
-                    Preferences.lastNotificationTitle = bundle.getString(Notification.EXTRA_TITLE) ?: ""
+                    Preferences.lastNotificationTitle = bundle.getString(Notification.EXTRA_TITLE)?.replace("WhatsApp: ", "") ?: ""
                     try {
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                             Preferences.lastNotificationIcon = sbn.notification.smallIcon.resId

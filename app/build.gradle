@@ -19,7 +19,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.tommasoberlose.anotherwidget"
+        applicationId "com.tommasoberlose.anotherwidget.BRTK83"
         minSdkVersion 23
         targetSdkVersion 30
         versionCode 139
