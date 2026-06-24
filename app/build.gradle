@@ -10,8 +10,13 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'realm-android'
 
 def apikeyPropertiesFile = rootProject.file("apikey.properties")
-def apikeyProperties = new Properties()
-apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
+if (apikeyPropertiesFile.exists()) {
+    def apikeyProperties = new Properties()
+    apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
+    android.defaultConfig.buildConfigField("String", "GOOGLE_API_KEY", apikeyProperties['GOOGLE_API_KEY'] ?: "\"\"")
+} else {
+    android.defaultConfig.buildConfigField("String", "GOOGLE_API_KEY", "\"\"")
+}
 
 android {
 
