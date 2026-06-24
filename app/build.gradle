@@ -10,15 +10,6 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'realm-android'
 
 def apikeyPropertiesFile = rootProject.file("apikey.properties")
-if (apikeyPropertiesFile.exists()) {
-    def apikeyProperties = new Properties()
-    apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
-    android.defaultConfig.buildConfigField("String", "GOOGLE_API_KEY", apikeyProperties['GOOGLE_API_KEY'] ?: "\"\"")
-} else {
-    android.defaultConfig.buildConfigField("String", "GOOGLE_API_KEY", "\"\"")
-}
-
-def apikeyPropertiesFile = rootProject.file("apikey.properties")
 def keyvalue = "\"\""
 
 if (apikeyPropertiesFile.exists()) {
@@ -28,6 +19,7 @@ if (apikeyPropertiesFile.exists()) {
         keyvalue = "\"${apikeyProperties['GOOGLE_API_KEY']}\""
     }
 }
+
 android {
 
     compileSdkVersion 30
@@ -41,7 +33,7 @@ android {
         versionName "2.3.3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "GOOGLE_API_KEY", apikeyProperties['GOOGLE_API_KEY'])
+        buildConfigField("String", "GOOGLE_API_KEY", keyvalue)
 
         renderscriptSupportModeEnabled true
     }
